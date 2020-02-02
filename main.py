@@ -1,27 +1,28 @@
 
 from flask import Flask
-from flask import jsonify
+from flask import jsonify, render_template, url_for
 
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def hello():
-    """Return a friendly HTTP greeting."""
-    return 'Hello World!'
+def home():
+    return render_template("home.html")
 
-@app.route('/name/<value>')
-def name(value):
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route('/jsnname/<value>')
+def jsnname(value):
     val = {"value": value}
     return jsonify(val)
 
-
-@app.route('/bob')
-def bob():
-    val = {"value": "bob"}
-    return jsonify(val)
-
+@app.route('/name/<value>')
+def name(value):
+    return "Hello, " + value + "!"
 
 
 if __name__ == '__main__':
